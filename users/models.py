@@ -1,5 +1,3 @@
-from datetime import date
-
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -7,13 +5,24 @@ from django.db import models
 
 
 class User(AbstractUser):
-    date_of_birth = models.DateField(null=True)
-    can_be_contacted = models.BooleanField(default=False)
-    can_data_be_shared = models.BooleanField(default=False)
+    date_of_birth = models.DateField(
+        verbose_name="Date de naissance",
+        null=True,
+        )
+    can_be_contacted = models.BooleanField(
+        verbose_name="Peut être contacté",
+        default=False, 
+        help_text="L'utilisateur accepte d'être contacté"
+    )
+    can_data_be_shared = models.BooleanField(
+        verbose_name="Partage des données autorisé",
+        default=False,
+        help_text="L'utilisateur accepte le partage de ses données",
+    )
 
-    def is_old_enough(self):
-        if not self.date_of_birth:
-            return False
-        today = date.today()
-        age = (today - self.date_of_birth).days / 365
-        return age >= 15
+    def __str__(self):
+        return self.username
+
+    class Meta:
+        verbose_name = "Utilisateur"
+        verbose_name_plural = "Utilisateurs"

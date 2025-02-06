@@ -9,6 +9,9 @@ djangorestframework = "*"
 django-cors-headers = "*"
 djangorestframework-simplejwt = "*"
 python-dotenv = "*"
+drf-nested-routers = "*"
+colorama = "*"
+drf-spectacular = "*"
 
 [dev-packages]
 
